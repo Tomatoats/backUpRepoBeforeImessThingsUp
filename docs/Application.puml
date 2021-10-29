@@ -1,0 +1,94 @@
+@startuml
+class Application {}
+class FXMLController {}
+
+package functions {
+    class Display {
+    ArrayList: List
+    -showAll()
+    -showComplete()
+    -showIncomplete()
+    -getArrayList()
+    }
+    class Edit {
+    String: ToEdit
+    ArrayList: List
+    String[] item;
+    -editListName()
+    -editItemName()
+    -editDueDate()
+    -editDescription()
+    -getArrayList()
+    -getItem()
+    -setToEdit(string)
+    Error.printError(string)
+    }
+    class Error {
+    +printError(string)
+    }
+    class Load {
+    -loadFile(file)
+
+    Error.printError(string)
+    }
+    class Mark {
+    String[]: item
+    -turnComplete()
+    -turnIncomplete()
+    -getItem()
+    }
+    class NewItem {
+    String[]:item
+    String: Title
+    String: DueDate
+    String: Description
+    -setTitle(string)
+    -setDueDate(string)
+    -setDescription(string)
+    -setItem()
+    Error.printError(string)
+    }
+    class NewList{
+    String: ListName
+    ArrayList: List
+    -setListName(string)
+    Error.printError(string)
+    }
+    class RemoveItem{
+    ArrayList:List
+    -deleteItem()
+    -RemoveList.deleteList()
+    -getArrayList()
+    }
+    class RemoveList{
+    ArrayList:List
+    +deleteList()
+    startScene()
+    -getArrayList()
+    }
+    class Save{
+    ArrayList: List
+    -AskListsToSave()
+    -Save()
+    -getArrayList()
+    }
+    class Warning{
+    +PrintWarning(string)
+    }
+    class functions {
+    hey so FXMLController
+    really connects to all
+    of these classes
+    but it looks ugly if I
+    connect FXMLController to all those
+    I just wish I could connect to just
+    this package in general but I cant figure
+    that out so here's my next best option
+    }
+}
+java.fx.application.Application <|-- Application
+Application -- FXMLController
+java.fx.initializable -- FXMLController
+FXMLController -- functions
+
+@enduml
