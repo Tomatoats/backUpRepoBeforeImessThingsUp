@@ -14,8 +14,7 @@ public class ListerTests {
     //i suspect its because of this "before each"
     //but the tests don't work at all if I do "beforeAll"
     //so please just be patient for the tests
-    @BeforeEach
-    void Setup() {
+    {
         //so I'm gonna have a List be an Arraylist of String[]
         //where an item is a String[4] for Title(String[0]), Due Date(String[1]), Description(String[2]),
         // and completed(String[3]) or not
@@ -57,12 +56,7 @@ public class ListerTests {
         //it and change Listname[0].
 
     }
-    @Test
-    void editTheItemNAme(){
-        //We figure out which item they want to switch the name, call that specific
-        //item in the arrayList, and then change whatever item that is by making it's
-        //0th element to whatever string the user puts
-    }
+
     @Test
     void editTheDueDate(){
         //We figure out which item they want to switch the name, call that specific
@@ -98,17 +92,7 @@ public class ListerTests {
         //we find the item that got turned incomplete and turn it's 3rd element
         //string to "incomplete"
     }
-    @Test
-    void CheckifItemisOver256(){
-        //we check the size of the arrayList, if it is over 256 we give
-        //an error that we can't take in anymore items, else we initialize a new String[]
 
-    }
-    @Test
-    void CheckSetTitle(){
-        //we have a string, and we set some item[0] to said string,
-        //double check with an assert that it properly took it
-    }
     @Test
     void CheckSetDueDate(){
         //we have a string, we check to make sure it is in proper format,
@@ -122,30 +106,20 @@ public class ListerTests {
         //double check with an assert that it properly took it
         //String can be empty in this one btw
     }
-    @Test
-    void SetListName(){
-        //We initialize a new arraylist and take in a string from the user.
-        // If it's under 3 characters, we ask them to try again.
-    }
+
     @Test
     void DoesDeleteItemWork(){
         //we're gonna remove an item from the ArrayList, and double check it worked
         //by checking Arraylist Size.
     }
     @Test
-    void DoesDeleteListWork(){
-        //we delete an item from the arrayList of size 1, so we have size 0. Then we call
-        //the deleteList function and makes sure the ArrayList is deleted.
+    void DoesClearListWork(){
+        //we call on the CLearList class and call it's deleteAll function.
     }
     @Test
     void DoesStartSceneWork(){
         //we call deleteList, and then make sure StartScene opens afterward so the user
         //can choose to load or start a new list.
-    }
-    @Test
-    void CanWeChooseListsToSave(){
-        //We get info of what lists the user wants us to save, and we send those to Save()
-        //where we export em to a Txt.
     }
     @Test
     void GetStringsForWarning(){

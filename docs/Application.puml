@@ -1,8 +1,22 @@
 @startuml
-class Application {}
-class FXMLController {}
 
+package controllers{
+
+class EditController {}
+class ErrorController {}
+class itemController {}
+class ListController {}
+class startController {
+to do: make this puml look way better
+and also add what these controllers do
+}
+class WarningController {}
+}
 package functions {
+    class ClearList{
+    ArrayList: List
+    +DeleteAll()
+    }
     class Display {
     ArrayList: List
     -showAll()
@@ -49,10 +63,8 @@ package functions {
     Error.printError(string)
     }
     class NewList{
-    String: ListName
+
     ArrayList: List
-    -setListName(string)
-    Error.printError(string)
     }
     class RemoveItem{
     ArrayList:List
@@ -68,27 +80,32 @@ package functions {
     }
     class Save{
     ArrayList: List
-    -AskListsToSave()
     -Save()
     -getArrayList()
     }
     class Warning{
     +PrintWarning(string)
     }
+    class Verify {
+    +DueDateRegex(string)
+    +DescriptionLength(string)
+    }
     class functions {
-    hey so FXMLController
-    really connects to all
-    of these classes
-    but it looks ugly if I
-    connect FXMLController to all those
-    I just wish I could connect to just
-    this package in general but I cant figure
-    that out so here's my next best option
+    I will move these into their specific things later
+    for now I don't know which will need what if
+     I'm being honest so I'mma point to all
+     of them in  here aaaannnd yeah
     }
 }
-java.fx.application.Application <|-- Application
-Application -- FXMLController
-java.fx.initializable -- FXMLController
-FXMLController -- functions
+java.fx.application.Application <|-- TodoListApplication
+TodoListApplication -- startController
+java.fx.initializable -- startController
+startController -- functions
+EditController -- functions
+ErrorController -- functions
+itemController -- functions
+ListController -- functions
+startController -- functions
+WarningController -- functions
 
 @enduml

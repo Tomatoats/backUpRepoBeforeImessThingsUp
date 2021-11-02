@@ -11,7 +11,7 @@ public class ClearList {
     //So in this one we're just gonna remove everything from the arrayList using a function
     private ArrayList List;
 
-    public void ClearList(){
+    public void DeleteAll(){
         //remove all the stuff in the list
     }
 

@@ -11,13 +11,9 @@ public class NewList {
      title that needs at least 3 characters. Then it will bring em to NewItem, where it will make one item.
      */
 
-    String ListName;
+    //actually false we don't need list names anymore
+    //so we're just gonna have it so this create and show the new list instance of an empty set
     ArrayList<String[]> List;
 
-    private void setListName(){
-        //If ListName isn't 3 characters or longer, send an error
-        //else: Make a new String[1],
-        //equal it to ListName,
-        //then add it to the new ArrayList
-    }
+
 }
