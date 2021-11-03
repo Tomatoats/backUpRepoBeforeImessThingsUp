@@ -1,5 +1,8 @@
 package baseline.controllers;
 
+import baseline.TodoListApplication;
+import baseline.functions.Item;
+import baseline.functions.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +20,11 @@ import javafx.stage.Window;
 import java.io.File;
 import java.io.IOException;
 
-public class ListController {
+public class ListController extends TodoListApplication {
     FileChooser fileChooser = new FileChooser();
+    List list;
+    Item items = new Item();
+
 
 
     @FXML
@@ -159,6 +165,9 @@ public class ListController {
         Stage stage = (Stage) ComboBox.getScene().getWindow();
         stage.close();
     }
-
+    public void show(){
+            DateLabel.setText(items.TheDueDate());
+            DescriptionLabel.setText(items.TheDescription());
+    }
 
 }

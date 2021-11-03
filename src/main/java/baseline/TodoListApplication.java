@@ -1,6 +1,8 @@
 package baseline;
 
 
+import baseline.functions.Item;
+import baseline.functions.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,6 +15,9 @@ import static javafx.application.Application.launch;
  */
 
 public class TodoListApplication extends javafx.application.Application {
+    List currentList = new List();
+    Item items = new Item();
+
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/start.fxml"));
 

@@ -6,6 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import baseline.TodoListApplication;
+import baseline.functions.Item;
+import baseline.functions.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +22,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class startController implements Initializable {
+public class startController extends TodoListApplication {
     /*
      *  UCF COP3330 Fall 2021 Application Assignment 1 Solution 1
      *  Copyright 2021 Alexys Veloz
      */
     FileChooser fileChooser = new FileChooser();
+
 
     @FXML
     private Label label;
@@ -60,13 +65,7 @@ public class startController implements Initializable {
             }
         }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        label = new Label();
-        label.setText("Hello, JavaFX " + javafxVersion + "\nRunning on Java " + javaVersion + ".");
-    }
+
 
     public void test(ActionEvent actionEvent) {
     }
