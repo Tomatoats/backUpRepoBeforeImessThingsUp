@@ -68,7 +68,7 @@ public class itemController extends TodoListApplication {
             //items = getItem();
             list.addItem(items);
             setUp();
-            lc.initializeTable();
+            lc.initializeTable(items);
 
             //Oclass ThingStore{
             //private ObersvableList<>() things;

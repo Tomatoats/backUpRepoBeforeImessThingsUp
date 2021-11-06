@@ -6,6 +6,7 @@ import baseline.functions.List;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,9 +16,11 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
+import java.util.ResourceBundle;
 
-public class ListController extends TodoListApplication {
+public class ListController extends TodoListApplication implements Initializable {
     FileChooser fileChooser = new FileChooser();
     List list;
     Item items;
@@ -27,7 +30,7 @@ public class ListController extends TodoListApplication {
 
     @FXML
     private Button AddItemButton;
-    @FXML
+    /*@FXML
     private TableColumn<Item, String> ColComplete;
 
     @FXML
@@ -44,7 +47,7 @@ public class ListController extends TodoListApplication {
 
     @FXML
     private TableColumn<Item, String> ColRemove;
-
+    */
     @FXML
     private Button SortAll;
 
@@ -74,8 +77,6 @@ public class ListController extends TodoListApplication {
     @FXML
     public Button RemoveItemButton;
 
-    @FXML
-    private ScrollBar Scroll;
 
     @FXML
     public Button editDateButton;
@@ -91,25 +92,26 @@ public class ListController extends TodoListApplication {
     @FXML
     private Button NewListButton;
 
-    public void initializeTable(){
-        //setListTable(ListTable);
-        ColRemove = new TableColumn("Remove?");
-        ColEditDesc = new TableColumn("Edit Desc");
-        ColDescription = new TableColumn("Description");
-        ColEditDate = new TableColumn("Edit Date");
-        ColDueDate = new TableColumn("Due Date");
-        ColComplete = new TableColumn("Completed?");
-        setUp();
-    }
-    private void setUp(){
+    public void initializeTable(Item items){
+        TableView listTable = new TableView();
+        setListTable(listTable);
+        TableColumn<Item,Button> ColRemove = new TableColumn<>("Remove?");
+        TableColumn<Item,Button> ColEditDesc = new TableColumn<>("Edit Desc");
+        TableColumn<Item,String> ColDescription = new TableColumn<>("Description");
+        TableColumn<Item,Button>  ColEditDate = new TableColumn<>("Edit Date");
+        TableColumn<Item,String> ColDueDate = new TableColumn<>("Due Date");
+        TableColumn<Item,CheckBox> ColComplete = new TableColumn<>("Completed?");
+        listTable.getColumns().addAll(ColRemove,ColEditDesc,ColDescription,ColEditDate,ColDueDate,ColComplete);
         ColRemove.setCellValueFactory(new PropertyValueFactory<>("removeItem"));
         ColEditDesc.setCellValueFactory(new PropertyValueFactory<>("editDescription"));
         ColDescription.setCellValueFactory(new PropertyValueFactory<>("todoDescription"));
         ColEditDate.setCellValueFactory(new PropertyValueFactory<>("editDueDate"));
         ColDueDate.setCellValueFactory(new PropertyValueFactory<>("duedate"));
         ColComplete.setCellValueFactory(new PropertyValueFactory<>("complete"));
-        getListTable();
-        //ListTable((ObservableList<List>) list);
+        list = getCurrentList();
+        list.addItem(items);
+        System.out.println(list.getAt(0).getDescription());
+        ListTable.setItems(list);
     }
 
 
@@ -190,6 +192,27 @@ public class ListController extends TodoListApplication {
     }
 
     public TableView<List> getListTable() {
-        return ListTable;
+       TableView<List> table = new TableView<List>();
+        return table;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        /*TableColumn ColRemove = new TableColumn("Remove?");
+        TableColumn ColEditDesc = new TableColumn("Edit Desc");
+        TableColumn ColDescription = new TableColumn("Description");
+        TableColumn  ColEditDate = new TableColumn("Edit Date");
+        TableColumn ColDueDate = new TableColumn("Due Date");
+        TableColumn ColComplete = new TableColumn("Completed?");
+
+        ListTable.getColumns().addAll(ColRemove,ColEditDesc,ColDescription,ColEditDate,ColDueDate,ColComplete);
+        ColRemove.setCellValueFactory(new PropertyValueFactory<>("removeItem"));
+        ColEditDesc.setCellValueFactory(new PropertyValueFactory<>("editDescription"));
+        ColDescription.setCellValueFactory(new PropertyValueFactory<>("todoDescription"));
+        ColEditDate.setCellValueFactory(new PropertyValueFactory<>("editDueDate"));
+        ColDueDate.setCellValueFactory(new PropertyValueFactory<>("duedate"));
+        ColComplete.setCellValueFactory(new PropertyValueFactory<>("complete"));
+        */
     }
 }

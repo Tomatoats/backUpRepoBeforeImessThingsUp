@@ -4,13 +4,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 public class Item {
-    private String duedate;
-    private String todoDescription;
+    String duedate;
+    String todoDescription;
     String[] putin = new String[2];
-    private CheckBox complete;
-    private Button editDueDate;
-    private Button editDescription;
-    private Button removeItem;
+    CheckBox complete;
+    Button editDueDate;
+    Button editDescription;
+    Button removeItem;
 
 
     public Item(String dd, String desc){
