@@ -1,11 +1,12 @@
 package baseline.functions;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 public class Item {
-    String duedate;
-    String todoDescription;
+    private SimpleStringProperty duedate;
+    private SimpleStringProperty todoDescription;
     String[] putin = new String[2];
     CheckBox complete;
     Button editDueDate;
@@ -14,8 +15,8 @@ public class Item {
 
 
     public Item(String dd, String desc){
-        this.duedate = new String(dd);
-        this.todoDescription = new String(desc);
+        this.duedate = new SimpleStringProperty(dd);
+        this.todoDescription = new SimpleStringProperty(desc);
         this.complete = new CheckBox();
         this.editDueDate = new Button("\uD83D\uDCDD");
         this.editDescription = new Button("\uD83D\uDCDD");
@@ -63,23 +64,23 @@ public class Item {
     public void removethisItem(){}
 
     public void setDueDate(String string){
-        duedate = string;
+        duedate.set(string);
     }
     public void setDescription(String string){
-        todoDescription = string;
+        todoDescription.set(string);
     }
     public String getDueDate(){
-        return duedate;
+        return duedate.get();
     }
     public String getDescription(){
-        return todoDescription;
+        return  todoDescription.get();
     }
 
 
     public Boolean DueDateRegex(String DueDate) {
         if (DueDate.matches("([0-9]{4})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])") || DueDate.isEmpty()) {
             System.out.printf("test\n");
-            duedate =DueDate;
+            setDueDate(DueDate);
             return true;
         } else {
             return false;
@@ -89,7 +90,7 @@ public class Item {
         if (Description.length() > 0 && Description.length() < 257)
         {
             System.out.printf("haha xd\n");
-            todoDescription = Description;
+            setDescription(Description);
             return  true;
         }
         else
