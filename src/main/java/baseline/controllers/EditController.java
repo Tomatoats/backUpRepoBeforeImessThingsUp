@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class EditController extends TodoListApplication {
@@ -52,13 +53,7 @@ public class EditController extends TodoListApplication {
         else
         {
             //update the description
-            close();
-            Parent root = FXMLLoader.load(getClass().getResource("/List.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("List!");
-            stage.setScene(scene);
-            stage.show();
+            closeAndOpen("List","List!");
         }
     }
     @FXML
@@ -71,29 +66,29 @@ public class EditController extends TodoListApplication {
         else
         {
             //update the due date
-            close();
-            Parent root = FXMLLoader.load(getClass().getResource("/List.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("List!");
-            stage.setScene(scene);
-            stage.show();
+            //tablview checkbox (tablecell)
+            closeAndOpen("List","List!");
         }
     }
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/List.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("List!");
-        stage.setScene(scene);
-        stage.show();
-
+        closeAndOpen("List","List!");
     }
     public void close(){
         Stage stage = (Stage) SubmitButton.getScene().getWindow();
         stage.close();
+    }
+    public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
+        close();
+        Addscenes();
+        Map theScenemap = getScenemap();
+        Scene scene = (Scene) theScenemap.get(fxmlname);
+        Stage stage = new Stage();
+        stage.setTitle(stageTitle);
+        stage.setScene(scene);
+        stage.show();
+
+
     }
 }

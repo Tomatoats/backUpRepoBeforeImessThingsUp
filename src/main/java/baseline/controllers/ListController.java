@@ -19,6 +19,7 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 public class ListController extends TodoListApplication {
     FileChooser fileChooser = new FileChooser();
@@ -68,82 +69,37 @@ public class ListController extends TodoListApplication {
 
     @FXML
     void WarnNewList(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/WarningNew.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Are you sure?");
-        stage.setScene(scene);
-        stage.show();
-
+        closeAndOpen("WarningNew","Are you sure?");
     }
 
     @FXML
     void EditDueDate(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/EditDueDate.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Due Date:");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("EditDueDate","Due Date:");
     }
 
     @FXML
     void OpenUpNewItem(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/AddItem.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Make a New Item!");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("AddItem","Make a New Item!");
     }
 
     @FXML
     void PopUpWarningClear(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/WarningClear.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Are you sure?");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("WarningClear","Are you sure?");
     }
 
     @FXML
     void PopUpWarningLoad(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/WarningLoad.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Are you sure?");
-        stage.setScene(scene);
-        stage.show();
-
-
-    }
+        closeAndOpen("WarningLoad","Are you sure?");
+       }
 
     @FXML
     void PopUpWarningRemove(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/WarningRemove.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Are you sure?");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("WarningRemove","Are you sure?");
     }
 
     @FXML
     void editDescription(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/EditDescription.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Description:");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("EditDescription","Description:");
     }
     @FXML
     void SaveList(ActionEvent event) {
@@ -166,8 +122,17 @@ public class ListController extends TodoListApplication {
         stage.close();
     }
     public void show(){
-            DateLabel.setText(items.TheDueDate());
-            DescriptionLabel.setText(items.TheDescription());
+            DateLabel.setText(items.getDueDate());
+            DescriptionLabel.setText(items.getDescription());
     }
-
+    public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
+        close();
+        Addscenes();
+        Map theScenemap = getScenemap();
+        Scene scene = (Scene) theScenemap.get(fxmlname);
+        Stage stage = new Stage();
+        stage.setTitle(stageTitle);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

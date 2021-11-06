@@ -6,17 +6,23 @@ public class Item {
     String[] putin = new String[2];
     boolean complete;
 
-    private void turnComplete(){
+    public void turnComplete(){
         complete = true;
     }
 
-    private void turnIncomplete(){
+    public void turnIncomplete(){
         complete = false;
     }
-    public String TheDueDate(){
+    public void setDueDate(String duedate){
+        putin[1] = duedate;
+    }
+    public void setDescription(String description){
+        putin[0] = description;
+    }
+    public String getDueDate(){
         return putin[1];
     }
-    public String TheDescription(){
+    public String getDescription(){
         return putin[0];
     }
 

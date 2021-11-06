@@ -4,16 +4,12 @@ package baseline.controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.Map;
 
 import baseline.TodoListApplication;
-import baseline.functions.Item;
-import baseline.functions.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,14 +46,7 @@ public class startController extends TodoListApplication {
                 File file = fileChooser.showOpenDialog(originalstage);
                 fileChooser.setInitialDirectory(file.getParentFile());
                 //send to save whatever the file is
-                close();
-                Parent root =  FXMLLoader.load(getClass().getResource("/List.fxml"));
-                Scene scene = new Scene(root);
-                Stage newstage = new Stage();
-                newstage.setTitle("List!");
-                newstage.setScene(scene);
-                newstage.show();
-
+                closeAndOpen("List","List!");
             }
             catch (Exception ex)
             {
@@ -78,18 +67,22 @@ public class startController extends TodoListApplication {
 
 
     public void openNewItem(ActionEvent actionEvent) throws IOException {
-            close();
-            Parent root =  FXMLLoader.load(getClass().getResource("/FirstItem.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("Make a New Item!");
-            stage.setScene(scene);
-            stage.show();
-
+        closeAndOpen("FirstItem","Make A New Item!");
     }
     public void close(){
             Stage stage = (Stage) newList.getScene().getWindow();
             stage.close();
+    }
+    public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
+        close();
+        Addscenes();
+        Map theScenemap = getScenemap();
+        Scene scene = (Scene) theScenemap.get(fxmlname);
+        Stage stage = new Stage();
+        stage.setTitle(stageTitle);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 }

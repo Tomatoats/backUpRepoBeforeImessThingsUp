@@ -3,8 +3,7 @@ package baseline.functions;
 import java.util.ArrayList;
 
 public class List {
-   private ArrayList<Item> List;
-   Item item;
+   ArrayList<Item> List = new ArrayList<>();
 
 
    private  void deleteItem(){
@@ -40,16 +39,15 @@ public class List {
 
    //TODO: Some NewItem function
    public Item getAt(int i){
-      List.get(i);
-      return item;
+      return List.get(i);
    }
    public String getDate(int i){
       Item tester = List.get(i);
-      return tester.TheDueDate();
+      return tester.getDueDate();
    }
    public String getDescription(int i){
       Item tester = List.get(i);
-      return tester.TheDescription();
+      return tester.getDescription();
    }
 
    public void addItem(Item item){
@@ -76,6 +74,12 @@ public class List {
       //it will pop up a new window
       //in which the warning will be displayed
       //to the user
+   }
+   public void setList(){
+
+   }
+   public  void getList(){
+
    }
 
 }
