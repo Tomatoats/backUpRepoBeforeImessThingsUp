@@ -3,6 +3,7 @@ package baseline.controllers;
 import baseline.TodoListApplication;
 import baseline.functions.Item;
 import baseline.functions.List;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +23,8 @@ import java.util.ResourceBundle;
 
 public class ListController extends TodoListApplication implements Initializable {
     FileChooser fileChooser = new FileChooser();
-    List list;
-    Item items;
+    private  ObservableList<Item> list = FXCollections.observableArrayList();
+    Item items = new Item("","");
 
 
 
@@ -50,6 +51,13 @@ public class ListController extends TodoListApplication implements Initializable
     */
     @FXML
     private Button SortAll;
+    @FXML
+    private Label ErrorLabel;
+
+    @FXML
+    private TextField DescriptionText;
+    @FXML
+    private TextField DueDateText;
 
     @FXML
     private Button SortComplete;
@@ -85,13 +93,59 @@ public class ListController extends TodoListApplication implements Initializable
     public Button editDescButton;
 
     @FXML
-    private TableView<List> ListTable;
+    private TableView<Item> ListTable;
 
     @FXML
     private Button SaveButton;
     @FXML
     private Button NewListButton;
 
+    @FXML
+    void AddPressed(ActionEvent event) throws IOException {
+        if (!Boolean.TRUE.equals(Boolean.TRUE.equals(items.DueDateRegex(DueDateText.getText()))) || !items.DescriptionLength(DescriptionText.getText())) {
+            ErrorLabel.setText("Description must be within 1-256 characters and Due Date should be in YYYY-MM-DD Format.");
+        } else {
+
+            ErrorLabel.setText("");
+            Item  quiz = new Item(DueDateText.getText(),DescriptionText.getText());
+            list = getCurrentList();
+            //items = getItem();
+            list.add(quiz);
+            DueDateText.clear();
+            DescriptionText.clear();
+            setUp();
+            initializeTable(items);
+
+            //Oclass ThingStore{
+            //private ObersvableList<>() things;
+            //public ThingStore(){
+            //things = new Observableist<>()
+            //public void addThing (thing T) {
+            // things.add(t)
+            //closeAndOpen("List", "List!");
+        }
+    }
+    public Item newItem(){
+
+        items.setDueDate(DueDateText.getText());
+        items.setDescription(DescriptionText.getText());
+        items.setComplete(CheckBox);
+        items.setEditDueDate(editDateButton);
+        items.setEditDescription(editDescButton);
+        items.setRemoveItem(RemoveItemButton);
+        return items;
+    }
+    private void setUp(){
+        //list = getCurrentList();
+
+        items.getRemoveItem();
+        items.getEditDescription();
+        items.getDescription();
+        items.getEditDueDate();
+        items.getDueDate();
+        items.getComplete();
+
+    }
     public void initializeTable(Item items){
         TableView listTable = new TableView();
         setListTable(listTable);
@@ -109,8 +163,7 @@ public class ListController extends TodoListApplication implements Initializable
         ColDueDate.setCellValueFactory(new PropertyValueFactory<>("duedate"));
         ColComplete.setCellValueFactory(new PropertyValueFactory<>("complete"));
         list = getCurrentList();
-        list.addItem(items);
-        System.out.println(list.getAt(0).getDescription());
+        //System.out.println(list.getAt(0).getDescription());
         ListTable.setItems(list);
     }
 
@@ -125,10 +178,7 @@ public class ListController extends TodoListApplication implements Initializable
         closeAndOpen("EditDueDate","Due Date:");
     }
 
-    @FXML
-    void OpenUpNewItem(ActionEvent event) throws IOException {
-        closeAndOpen("AddItem","Make a New Item!");
-    }
+
 
     @FXML
     void PopUpWarningClear(ActionEvent event) throws IOException {
@@ -187,7 +237,7 @@ public class ListController extends TodoListApplication implements Initializable
         return items;
     }
 
-    public void setListTable(TableView<List> listTable) {
+    public void setListTable(TableView<Item> listTable) {
         this.ListTable = listTable;
     }
 
@@ -196,6 +246,14 @@ public class ListController extends TodoListApplication implements Initializable
         return table;
     }
 
+    @FXML
+    void printList(ActionEvent event) {
+        for (int i = 0; i < list.size(); i++){
+            System.out.println(list.get(i).getDescription());
+            System.out.println(list.get(i).getDueDate());
+            System.out.println(list.size());
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

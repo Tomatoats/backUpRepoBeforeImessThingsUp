@@ -67,7 +67,7 @@ public class startController extends TodoListApplication {
 
 
     public void openNewItem(ActionEvent actionEvent) throws IOException {
-        closeAndOpen("FirstItem","Make A New Item!");
+        closeAndOpen("List","List!");
     }
     public void close(){
             Stage stage = (Stage) newList.getScene().getWindow();

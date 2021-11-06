@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class itemController extends TodoListApplication {
-    List list;
+    ObservableList<Item> list;
     Item items = new Item("","");
     ListController lc = new ListController();
 
@@ -66,7 +66,7 @@ public class itemController extends TodoListApplication {
             newItem();
             list = getCurrentList();
             //items = getItem();
-            list.addItem(items);
+            list.add(items);
             setUp();
             lc.initializeTable(items);
 
@@ -78,8 +78,8 @@ public class itemController extends TodoListApplication {
             // things.add(t)
             closeAndOpen("List","List!");
 
-            System.out.println(list.getAt(0).getDueDate());
-            System.out.println(list.getAt(0).getDescription());
+            //System.out.println(list.getAt(0).getDueDate());
+            //System.out.println(list.getAt(0).getDescription());
         }
     }
 

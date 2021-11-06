@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -42,12 +43,12 @@
             </CheckBox>
          </children>
       </HBox>
-      <Button fx:id="AddItemButton" layoutX="21.0" layoutY="514.0" mnemonicParsing="false" onAction="#OpenUpNewItem" prefHeight="66.0" prefWidth="122.0" text="+">
+      <Button fx:id="AddItemButton" layoutX="664.0" layoutY="508.0" mnemonicParsing="false" onAction="#AddPressed" prefHeight="66.0" prefWidth="122.0" text="+">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Button>
-      <HBox alignment="CENTER_RIGHT" layoutX="191.0" layoutY="520.0" prefHeight="66.0" prefWidth="609.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="101.0" layoutY="561.0" prefHeight="66.0" prefWidth="570.0">
          <children>
             <Button fx:id="ClearButton" mnemonicParsing="false" onAction="#PopUpWarningClear" prefHeight="37.0" prefWidth="85.0" text="Clear" textFill="RED">
                <HBox.margin>
@@ -87,9 +88,9 @@
             <TableColumn fx:id="ColComplete" editable="false" prefWidth="82.0" text="Completed?" />
         </columns>
       </TableView>
-      <VBox alignment="TOP_CENTER" layoutX="147.0" layoutY="508.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="119.0" prefWidth="94.0">
+      <VBox alignment="TOP_CENTER" layoutX="-1.0" layoutY="508.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="119.0" prefWidth="122.0">
          <children>
-            <Button fx:id="SortAll" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="All">
+            <Button fx:id="SortAll" mnemonicParsing="false" onAction="#printList" prefHeight="25.0" prefWidth="76.0" text="All">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
@@ -102,5 +103,30 @@
             </Button>
          </children>
       </VBox>
+      <HBox layoutX="104.0" layoutY="515.0" prefHeight="25.0" prefWidth="551.0">
+         <children>
+            <Label text="Description:">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="DescriptionText" prefHeight="25.0" prefWidth="193.0" promptText="Must be within 1-256 characaters" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="(Optional) Due Date:">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="DueDateText" promptText="Format: YYYY-MM-DD">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox layoutX="104.0" layoutY="545.0" prefHeight="25.0" prefWidth="559.0">
+         <children>
+            <Label fx:id="ErrorLabel" alignment="BOTTOM_LEFT" />
+         </children>
+      </HBox>
    </children>
 </Pane>

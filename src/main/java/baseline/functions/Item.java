@@ -79,7 +79,6 @@ public class Item {
 
     public Boolean DueDateRegex(String DueDate) {
         if (DueDate.matches("([0-9]{4})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])") || DueDate.isEmpty()) {
-            System.out.printf("test\n");
             setDueDate(DueDate);
             return true;
         } else {
@@ -89,7 +88,6 @@ public class Item {
     public boolean DescriptionLength(String Description){
         if (Description.length() > 0 && Description.length() < 257)
         {
-            System.out.printf("haha xd\n");
             setDescription(Description);
             return  true;
         }
