@@ -21,7 +21,7 @@ import static javafx.application.Application.launch;
 
 public class TodoListApplication extends javafx.application.Application {
      List currentList = new List();
-     Item items = new Item();
+     Item items;
      Map<String,Scene> scenemap = new HashMap<>();
 
 
@@ -86,9 +86,18 @@ public class TodoListApplication extends javafx.application.Application {
         List test = new List();
         this.currentList = test;
     }
+    public void setItems(){
+        Item tester = new Item("","");
+        this.items = tester;
+    }
+    public Item getItems(){
+        return items;
+    }
     public List getCurrentList(){
         return currentList;
     }
+
+
     public Map getScenemap(){
         return scenemap;
     }

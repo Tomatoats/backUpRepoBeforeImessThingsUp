@@ -1,36 +1,85 @@
 package baseline.functions;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+
 public class Item {
-    String duedate;
-    String todo;
+    private String duedate;
+    private String todoDescription;
     String[] putin = new String[2];
-    boolean complete;
+    private CheckBox complete;
+    private Button editDueDate;
+    private Button editDescription;
+    private Button removeItem;
+
+
+    public Item(String dd, String desc){
+        this.duedate = new String(dd);
+        this.todoDescription = new String(desc);
+        this.complete = new CheckBox();
+        this.editDueDate = new Button("\uD83D\uDCDD");
+        this.editDescription = new Button("\uD83D\uDCDD");
+        this.removeItem = new Button("X");
+    }
+
+    public void setComplete(CheckBox complete) {
+        this.complete = complete;
+    }
+
+    public void setEditDueDate(Button editDueDate) {
+        this.editDueDate = editDueDate;
+    }
+
+    public void setEditDescription(Button editDescription) {
+        this.editDescription = editDescription;
+    }
+
+    public void setRemoveItem(Button removeItem) {
+        this.removeItem = removeItem;
+    }
+
+    public CheckBox getComplete() {
+        return complete;
+    }
+
+    public Button getEditDueDate() {
+        return editDueDate;
+    }
+
+    public Button getEditDescription() {
+        return editDescription;
+    }
+    public Button getRemoveItem(){
+        return removeItem;
+    }
 
     public void turnComplete(){
-        complete = true;
     }
 
     public void turnIncomplete(){
-        complete = false;
     }
-    public void setDueDate(String duedate){
-        putin[1] = duedate;
+    public void editThisDueDate(){}
+    public void editThisDescription(){}
+    public void removethisItem(){}
+
+    public void setDueDate(String string){
+        duedate = string;
     }
-    public void setDescription(String description){
-        putin[0] = description;
+    public void setDescription(String string){
+        todoDescription = string;
     }
     public String getDueDate(){
-        return putin[1];
+        return duedate;
     }
     public String getDescription(){
-        return putin[0];
+        return todoDescription;
     }
 
 
     public Boolean DueDateRegex(String DueDate) {
-        if (DueDate.matches("((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])") || DueDate.isEmpty()) {
+        if (DueDate.matches("([0-9]{4})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])") || DueDate.isEmpty()) {
             System.out.printf("test\n");
-            putin[1] =DueDate;
+            duedate =DueDate;
             return true;
         } else {
             return false;
@@ -40,7 +89,7 @@ public class Item {
         if (Description.length() > 0 && Description.length() < 257)
         {
             System.out.printf("haha xd\n");
-            putin[0] = Description;
+            todoDescription = Description;
             return  true;
         }
         else

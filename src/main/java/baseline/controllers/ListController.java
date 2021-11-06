@@ -3,16 +3,12 @@ package baseline.controllers;
 import baseline.TodoListApplication;
 import baseline.functions.Item;
 import baseline.functions.List;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -24,21 +20,47 @@ import java.util.Map;
 public class ListController extends TodoListApplication {
     FileChooser fileChooser = new FileChooser();
     List list;
-    Item items = new Item();
+    Item items;
+
 
 
 
     @FXML
     private Button AddItemButton;
+    @FXML
+    private TableColumn<Item, String> ColComplete;
 
     @FXML
-    private CheckBox CheckBox;
+    private TableColumn<Item, String> ColDescription;
+
+    @FXML
+    private TableColumn<Item, String> ColDueDate;
+
+    @FXML
+    private TableColumn<Item, String> ColEditDate;
+
+    @FXML
+    private TableColumn<Item, String> ColEditDesc;
+
+    @FXML
+    private TableColumn<Item, String> ColRemove;
+
+    @FXML
+    private Button SortAll;
+
+    @FXML
+    private Button SortComplete;
+
+    @FXML
+    private Button SortIncomplete;
+
+
+    @FXML
+    public CheckBox CheckBox;
 
     @FXML
     private Button ClearButton;
 
-    @FXML
-    private ComboBox<?> ComboBox;
 
     @FXML
     private Label DateLabel;
@@ -50,21 +72,45 @@ public class ListController extends TodoListApplication {
     private Button LoadButton;
 
     @FXML
-    private Button RemoveItemButton;
+    public Button RemoveItemButton;
 
     @FXML
     private ScrollBar Scroll;
 
     @FXML
-    private Button editDateButton;
+    public Button editDateButton;
 
     @FXML
-    private Button editDescButton;
+    public Button editDescButton;
+
+    @FXML
+    private TableView<List> ListTable;
 
     @FXML
     private Button SaveButton;
     @FXML
     private Button NewListButton;
+
+    public void initializeTable(){
+        //setListTable(ListTable);
+        ColRemove = new TableColumn("Remove?");
+        ColEditDesc = new TableColumn("Edit Desc");
+        ColDescription = new TableColumn("Description");
+        ColEditDate = new TableColumn("Edit Date");
+        ColDueDate = new TableColumn("Due Date");
+        ColComplete = new TableColumn("Completed?");
+        setUp();
+    }
+    private void setUp(){
+        ColRemove.setCellValueFactory(new PropertyValueFactory<>("removeItem"));
+        ColEditDesc.setCellValueFactory(new PropertyValueFactory<>("editDescription"));
+        ColDescription.setCellValueFactory(new PropertyValueFactory<>("todoDescription"));
+        ColEditDate.setCellValueFactory(new PropertyValueFactory<>("editDueDate"));
+        ColDueDate.setCellValueFactory(new PropertyValueFactory<>("duedate"));
+        ColComplete.setCellValueFactory(new PropertyValueFactory<>("complete"));
+        getListTable();
+        //ListTable((ObservableList<List>) list);
+    }
 
 
     @FXML
@@ -118,7 +164,7 @@ public class ListController extends TodoListApplication {
 
     }
     public void close(){
-        Stage stage = (Stage) ComboBox.getScene().getWindow();
+        Stage stage = (Stage) SaveButton.getScene().getWindow();
         stage.close();
     }
     public void show(){
@@ -134,5 +180,16 @@ public class ListController extends TodoListApplication {
         stage.setTitle(stageTitle);
         stage.setScene(scene);
         stage.show();
+    }
+    public Item getItem(){
+        return items;
+    }
+
+    public void setListTable(TableView<List> listTable) {
+        this.ListTable = listTable;
+    }
+
+    public TableView<List> getListTable() {
+        return ListTable;
     }
 }

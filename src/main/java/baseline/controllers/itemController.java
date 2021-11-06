@@ -3,6 +3,7 @@ package baseline.controllers;
 import baseline.TodoListApplication;
 import baseline.functions.Item;
 import baseline.functions.List;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,7 +19,7 @@ import java.util.Map;
 
 public class itemController extends TodoListApplication {
     List list;
-    Item items = new Item();
+    Item items = new Item("","");
     ListController lc = new ListController();
 
 
@@ -63,8 +65,11 @@ public class itemController extends TodoListApplication {
         {
             newItem();
             list = getCurrentList();
-            items = getItem();
+            //items = getItem();
             list.addItem(items);
+            setUp();
+            lc.initializeTable();
+
             //Oclass ThingStore{
             //private ObersvableList<>() things;
             //public ThingStore(){
@@ -94,18 +99,34 @@ public class itemController extends TodoListApplication {
         stage.show();
     }
     public void newItem(){
+
         items.setDueDate(DueDateText.getText());
         items.setDescription(DescriptionText.getText());
-        items.turnIncomplete();
+        items.setComplete(lc.CheckBox);
+        items.setEditDueDate(lc.editDateButton);
+        items.setEditDescription(lc.editDescButton);
+        items.setRemoveItem(lc.RemoveItemButton);
     }
     public Item getItem(){
         return items;
     }
+
     public void setItem(){
-        Item emptyItem = new Item();
+        Item emptyItem = new Item("","");
         emptyItem.setDueDate("");
         emptyItem.setDescription("");
         emptyItem.turnIncomplete();
         this.items = emptyItem;
+    }
+    private void setUp(){
+        //list = getCurrentList();
+
+        items.getRemoveItem();
+        items.getEditDescription();
+        items.getDescription();
+        items.getEditDueDate();
+        items.getDueDate();
+        items.getComplete();
+
     }
 }
