@@ -46,14 +46,6 @@ public class ListController extends TodoListApplication implements  Initializabl
     @FXML
     public TableColumn colDueDate;
 
-    @FXML
-    public TableColumn<Item, Button> colEditDate;
-
-    @FXML
-    public TableColumn<Item, Button> colEditDesc;
-
-    @FXML
-    public TableColumn<Item, Button> colRemove;
 
     @FXML
     private Button SortAll;
@@ -128,21 +120,7 @@ public class ListController extends TodoListApplication implements  Initializabl
         }
     }
 
-    public Item newItem(){
 
-        items.setDueDate(DueDateText.getText());
-        items.setDescription(DescriptionText.getText());
-        items.setComplete(CheckBox);
-        return items;
-    }
-    private void setUp(){
-
-
-        items.getDescription();
-        items.getDueDate();
-        items.getComplete();
-
-    }
 
 
     @FXML
@@ -173,7 +151,6 @@ public class ListController extends TodoListApplication implements  Initializabl
                         }
                 );
         colComplete.setCellValueFactory(new PropertyValueFactory<>("complete"));
-        //list.add(new Item("2021-01-01", "test"));
         ListTable.setItems(list);
     }
 

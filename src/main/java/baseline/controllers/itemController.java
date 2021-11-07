@@ -105,19 +105,4 @@ public class itemController extends TodoListApplication {
         return items;
     }
 
-    public void setItem(){
-        Item emptyItem = new Item("","");
-        emptyItem.setDueDate("");
-        emptyItem.setDescription("");
-        emptyItem.turnIncomplete();
-        this.items = emptyItem;
-    }
-    private void setUp(){
-        //list = getCurrentList();
-
-        items.getDescription();
-        items.getDueDate();
-        items.getComplete();
-
-    }
 }
