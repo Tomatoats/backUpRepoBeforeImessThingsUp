@@ -2,6 +2,10 @@ package baseline.functions;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+/*
+ *  UCF COP3330 Fall 2021 Application Assignment 1 Solution
+ *  Copyright 2021 Alexys Veloz
+ */
 
 public class Item {
     String dueDate;
@@ -32,20 +36,17 @@ public class Item {
         this.complete = complete;
     }
     public void whatComplete (String string){
-        if (string.equals(true)){
-            complete.isSelected();
+        if (string.equals("true")){
+            this.complete.setSelected(true);
+            setComplete(complete);
         }
+
     }
 
     public CheckBox getComplete() {
         return complete;
     }
 
-
-
-
-    public void turnIncomplete(){
-    }
 
     public void setDueDate(String string){
         this.dueDate = string;

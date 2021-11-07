@@ -20,11 +20,15 @@ import javafx.stage.Window;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+
+/*
+ *  UCF COP3330 Fall 2021 Application Assignment 1 Solution
+ *  Copyright 2021 Alexys Veloz
+ */
 public class ListController extends TodoListApplication implements  Initializable{
     FileChooser fileChooser = new FileChooser();
     ObservableList<Item> list = FXCollections.observableArrayList();
@@ -65,10 +69,8 @@ public class ListController extends TodoListApplication implements  Initializabl
     private TableView<Item> listTable;
     @FXML
     public TableColumn colComplete;
-
     @FXML
     public TableColumn colDescription;
-
     @FXML
     public TableColumn colDueDate;
     @FXML
@@ -79,9 +81,85 @@ public class ListController extends TodoListApplication implements  Initializabl
         initializeTable();
 
     }
-
     @FXML
     void addPressed(ActionEvent event) {
+        addItem();
+    }
+    @FXML
+    void removePressed(ActionEvent event) {
+        removeItem();
+    }
+
+    @FXML
+    void allPress(ActionEvent event) {
+        allList();
+    }
+
+    @FXML
+    void completePress(ActionEvent event) {
+       completeLists();
+    }
+
+    @FXML
+    void incompletePress(ActionEvent event) {
+        incompleteLists();
+    }
+
+    @FXML
+    void clearPressed(ActionEvent event) {
+        clearList();
+    }
+
+    @FXML
+    void loadPressed(ActionEvent event) throws IOException {
+        listload();
+    }
+
+    @FXML
+    void saveList(ActionEvent event) {
+        findAndSave();
+    }
+
+    public void removeItem(){
+        listTable.getItems().removeAll(listTable.getSelectionModel().getSelectedItem());
+    }
+    public void findAndSave(){
+        Window stage = saveButton.getScene().getWindow();
+        fileChooser.setTitle("Save Dialog");
+        fileChooser.setInitialFileName("Lister");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
+        try {
+
+            File file = fileChooser.showSaveDialog(stage);
+            fileChooser.setInitialDirectory(file.getParentFile());
+            save(file);
+        }
+        catch (Exception ignored){}
+
+
+    }
+    public void incompleteLists(){
+        ObservableList<Item> incompleteList = FXCollections.observableArrayList();
+        for (Item item : list) {
+            if (!item.complete.isSelected()) {
+                incompleteList.add(item);
+            }
+        }
+        listTable.setItems(incompleteList);
+    }
+    public void completeLists(){
+        ObservableList<Item> completeList = FXCollections.observableArrayList();
+        for (Item item : list) {
+            if (item.complete.isSelected()) {
+                completeList.add(item);
+            }
+        }
+        listTable.setItems(completeList);
+    }
+    public void allList(){
+        listTable.setItems(list);
+    }
+    public void addItem(){
         if (!Boolean.TRUE.equals(Boolean.TRUE.equals(items.dueDateRegex(dueDateText.getText()))) || !items.descriptionLength(descriptionText.getText())) {
             errorLabel.setText("Description must be within 1-256 characters and Due Date should be in YYYY-MM-DD Format.");
         } else {
@@ -93,81 +171,6 @@ public class ListController extends TodoListApplication implements  Initializabl
         }
     }
 
-    @FXML
-    void removePressed(ActionEvent event) {
-        listTable.getItems().removeAll(listTable.getSelectionModel().getSelectedItem());
-    }
-
-    @FXML
-    void allPress(ActionEvent event) {
-        listTable.setItems(list);
-    }
-
-    @FXML
-    void completePress(ActionEvent event) {
-        ObservableList<Item> completeList = FXCollections.observableArrayList();
-        for (Item item : list) {
-            if (item.complete.isSelected()) {
-                completeList.add(item);
-            }
-        }
-        listTable.setItems(completeList);
-    }
-
-    @FXML
-    void incompletePress(ActionEvent event) {
-        ObservableList<Item> incompleteList = FXCollections.observableArrayList();
-        for (Item item : list) {
-            if (!item.complete.isSelected()) {
-                incompleteList.add(item);
-            }
-        }
-        listTable.setItems(incompleteList);
-    }
-
-    @FXML
-    void clearPressed(ActionEvent event) {
-        clearList();
-    }
-
-    @FXML
-    void loadPressed(ActionEvent event) throws IOException {
-        listload();
-        closeAndOpen("List", "List!");
-    }
-
-    @FXML
-    void saveList(ActionEvent event) {
-        Window stage = saveButton.getScene().getWindow();
-        fileChooser.setTitle("Save Dialog");
-        fileChooser.setInitialFileName("Lister");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
-        try {
-
-            File file = fileChooser.showSaveDialog(stage);
-            fileChooser.setInitialDirectory(file.getParentFile());
-            save(file);
-            /*try {
-                save(file);
-            }
-            catch (Exception ignored){}*/
-        }
-        catch (Exception ignored){}
-
-    }
-
-
-    public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
-        close();
-        addscenes();
-        Map<String, Scene> theScenemap = getScenemap();
-        Scene scene = theScenemap.get(fxmlname);
-        Stage stage = new Stage();
-        stage.setTitle(stageTitle);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public Item getItem(){
         return items;
     }
@@ -175,10 +178,10 @@ public class ListController extends TodoListApplication implements  Initializabl
     public void setListTable(TableView<Item> listTable) {
         this.listTable = listTable;
     }
+
     public TableView<List> getListTable() {
         return new TableView<>();
     }
-
 
     public static void main(String[] args) {
         launch(args);
@@ -190,7 +193,7 @@ public class ListController extends TodoListApplication implements  Initializabl
 
     public void clearList(){
         list.remove(0,list.size());
-        listTable.setItems(list);
+        //listTable.setItems(list);
     }
 
     @FXML
@@ -224,40 +227,31 @@ public class ListController extends TodoListApplication implements  Initializabl
         listTable.setItems(list);
     }
 
-    public void listload(){
-    Window originalstage = errorLabel.getScene().getWindow();
+    public void listload() {
+        Window originalstage = errorLabel.getScene().getWindow();
         fileChooser.setTitle("Load Dialog");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
-    File file = fileChooser.showOpenDialog(originalstage);
+        File file = fileChooser.showOpenDialog(originalstage);
         fileChooser.setInitialDirectory(file.getParentFile());
-        try (
-    Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter(",")) {
-        Item items = new Item("", "");
-        //also use a while to make sure it continues after the delimiter
-        int i = 0;
-        int k;
-        ArrayList<String[]> userInput = new ArrayList<>();
-        String[] user = new String[3];
-        while (input.hasNext()) {
-            k = i%3;
-
-            user[k] = input.next();
-            if (k == 2){
-                items.setDescription(user[0]);
-                items.setDueDate(user[1]);
-                items.whatComplete(user[2]);
-                userInput.add(user);
+        try (Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter("\n"))
+        {
+            clearList();
+            //also use a while to make sure it continues after the delimiter
+            while (input.hasNext()) {
+                Item items = new Item("", "");
+                String str = input.next();
+                String[] ArrayofString = str.split(",", 3);
+                items.setDescription(ArrayofString[0]);
+                items.setDueDate(ArrayofString[1]);
+                items.whatComplete(ArrayofString[2]);
                 list.add(items);
             }
-            i++;
+            errorLabel.setText("");
         }
-        setList(list);
+        catch (ArrayIndexOutOfBoundsException | IOException arrayIndexOutOfBoundsException) {
+            errorLabel.setText("Either the file was corrupted or not in Lister format.");
 
-    } catch (Exception e) {
-        System.out.println(e);
-
-    }
-
+        }
 }
 
     void save(File file) throws IOException {
@@ -280,6 +274,17 @@ public class ListController extends TodoListApplication implements  Initializabl
         catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
+        close();
+        addscenes();
+        Map<String, Scene> theScenemap = getScenemap();
+        Scene scene = theScenemap.get(fxmlname);
+        Stage stage = new Stage();
+        stage.setTitle(stageTitle);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void close(){
