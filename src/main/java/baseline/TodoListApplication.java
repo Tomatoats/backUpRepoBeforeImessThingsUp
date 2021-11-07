@@ -2,7 +2,6 @@ package baseline;
 
 
 import baseline.functions.Item;
-import baseline.functions.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static javafx.application.Application.launch;
 /*
  *  UCF COP3330 Fall 2021 Application Assignment 1 Solution 1
  *  Copyright 2021 Alexys Veloz
@@ -23,16 +21,15 @@ import static javafx.application.Application.launch;
 
 public class TodoListApplication extends javafx.application.Application {
     ObservableList<Item> currentList = FXCollections.observableArrayList();
-     Item items;
      Map<String,Scene> scenemap = new HashMap<>();
 
 
     public void start(Stage stage) throws Exception {
-        Addscenes();
+        addscenes();
 
 
         Scene scene = scenemap.get("start");
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles.css")).toExternalForm());
 
         stage.setTitle("Lister");
         stage.setScene(scene);
@@ -41,10 +38,9 @@ public class TodoListApplication extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        TodoListApplication myTodoListApplication;
         launch(args);
     }
-    public void Addscenes() throws IOException {
+    public void addscenes() throws IOException {
         Map<String,Scene> addmap = new HashMap<>();
         Parent add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AddItem.fxml")));
         Scene toAdd = new Scene(add);
@@ -79,28 +75,14 @@ public class TodoListApplication extends javafx.application.Application {
         add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WarningNew.fxml")));
         toAdd = new Scene(add);
         addmap.put("WarningNew",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WarningRemove.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("WarningRemove",toAdd);
         this.scenemap = addmap;
-    }
-    public void setCurrentList(){
-        ObservableList<Item> test = FXCollections.observableArrayList();
-        this.currentList = test;
-    }
-    public void setItems(){
-        Item tester = new Item("","");
-        this.items = tester;
-    }
-    public Item getItems(){
-        return items;
     }
     public ObservableList<Item> getCurrentList(){
         return currentList;
     }
 
 
-    public Map getScenemap(){
+    public Map<String, Scene> getScenemap(){
         return scenemap;
     }
 

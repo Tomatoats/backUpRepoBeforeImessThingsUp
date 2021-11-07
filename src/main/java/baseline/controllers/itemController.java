@@ -2,7 +2,6 @@ package baseline.controllers;
 
 import baseline.TodoListApplication;
 import baseline.functions.Item;
-import baseline.functions.List;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,7 +57,7 @@ public class itemController extends TodoListApplication {
 
     @FXML
     void SubmitPressed(ActionEvent event) throws IOException {
-        if (!Boolean.TRUE.equals(Boolean.TRUE.equals(items.DueDateRegex(DueDateText.getText()))) || !items.DescriptionLength(DescriptionText.getText())) {
+        if (!Boolean.TRUE.equals(Boolean.TRUE.equals(items.dueDateRegex(DueDateText.getText()))) || !items.descriptionLength(DescriptionText.getText())) {
             ErrorLabel.setText("You have at least one error. Fix and try again.");
         } else
         {
@@ -67,8 +65,7 @@ public class itemController extends TodoListApplication {
             list = getCurrentList();
             //items = getItem();
             list.add(items);
-            setUp();
-            lc.initializeTable(items);
+
 
             //Oclass ThingStore{
             //private ObersvableList<>() things;
@@ -90,7 +87,7 @@ public class itemController extends TodoListApplication {
 
     public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
         close();
-        Addscenes();
+        addscenes();
         Map theScenemap = getScenemap();
         Scene scene = (Scene) theScenemap.get(fxmlname);
         Stage stage = new Stage();
@@ -103,9 +100,6 @@ public class itemController extends TodoListApplication {
         items.setDueDate(DueDateText.getText());
         items.setDescription(DescriptionText.getText());
         items.setComplete(lc.CheckBox);
-        items.setEditDueDate(lc.editDateButton);
-        items.setEditDescription(lc.editDescButton);
-        items.setRemoveItem(lc.RemoveItemButton);
     }
     public Item getItem(){
         return items;
@@ -121,10 +115,7 @@ public class itemController extends TodoListApplication {
     private void setUp(){
         //list = getCurrentList();
 
-        items.getRemoveItem();
-        items.getEditDescription();
         items.getDescription();
-        items.getEditDueDate();
         items.getDueDate();
         items.getComplete();
 
