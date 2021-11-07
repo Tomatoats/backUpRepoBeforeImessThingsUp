@@ -42,39 +42,15 @@ public class TodoListApplication extends javafx.application.Application {
     }
     public void addscenes() throws IOException {
         Map<String,Scene> addmap = new HashMap<>();
-        Parent add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AddItem.fxml")));
+        Parent add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/start.fxml")));
         Scene toAdd = new Scene(add);
-        addmap.put("AddItem",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/FirstItem.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("FirstItem",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/EditDescription.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("EditDescription",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/EditDueDate.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("EditDueDate",toAdd);
+        addmap.put("start",toAdd);
         add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Error.fxml")));
         toAdd = new Scene(add);
         addmap.put("Error",toAdd);
         add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/List.fxml")));
         toAdd = new Scene(add);
         addmap.put("List",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/NewItem.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("NewItem",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/start.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("start",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WarningClear.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("WarningClear",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WarningLoad.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("WarningLoad",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WarningNew.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("WarningNew",toAdd);
         this.scenemap = addmap;
     }
     public ObservableList<Item> getCurrentList(){
