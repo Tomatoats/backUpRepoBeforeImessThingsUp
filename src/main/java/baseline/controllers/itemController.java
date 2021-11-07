@@ -99,7 +99,7 @@ public class itemController extends TodoListApplication {
 
         items.setDueDate(DueDateText.getText());
         items.setDescription(DescriptionText.getText());
-        items.setComplete(lc.CheckBox);
+        items.setComplete(lc.checkBox);
     }
     public Item getItem(){
         return items;
