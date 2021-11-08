@@ -31,7 +31,7 @@ import java.util.Scanner;
  */
 public class ListController extends TodoListApplication implements  Initializable{
     FileChooser fileChooser = new FileChooser();
-    ObservableList<Item> list = FXCollections.observableArrayList();
+    public ObservableList<Item> list = FXCollections.observableArrayList();
     Item items = new Item("","");
     int k = 0;
 
@@ -50,11 +50,11 @@ public class ListController extends TodoListApplication implements  Initializabl
 
 
     @FXML
-    private TextField descriptionText;
+    public TextField descriptionText;
     @FXML
-    private TextField dueDateText;
+    public TextField dueDateText;
     @FXML
-    private Label errorLabel;
+    public Label errorLabel;
 
 
     @FXML
@@ -108,6 +108,7 @@ public class ListController extends TodoListApplication implements  Initializabl
     @FXML
     void clearPressed(ActionEvent event) {
         clearList();
+        allList();
     }
 
     @FXML

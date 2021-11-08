@@ -10,8 +10,8 @@ class ListController {
     -Button sortIncomplete;
 
 
-    -TextField descriptionText;
-    -TextField dueDateText;
+    +TextField descriptionText;
+    +TextField dueDateText;
     -Label errorLabel;
 
 
@@ -77,7 +77,6 @@ package functions {
      String dueDate;
      String description;
      public CheckBox complete;
-     Button remove;
      +Item(String,String)
      +getDueDate()
      +getDescription()

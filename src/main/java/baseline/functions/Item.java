@@ -11,15 +11,12 @@ public class Item {
     String dueDate;
     String description;
     public CheckBox complete;
-    Button remove;
 
 
     public Item(String dd, String desc){
         this.dueDate = dd;
         this.description = desc;
         this.complete = new CheckBox();
-        this.remove = new Button("X");
-
 
     }
 
